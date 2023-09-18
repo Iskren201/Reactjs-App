@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import './WeatherApp.css';
+import { Navigate, Redirect } from "react-router-dom";
+
 
 import search_icon from '../Assets/search.png';
 import clear_icon from '../Assets/clear.png';
@@ -9,6 +11,7 @@ import rain_icon from '../Assets/rain.png';
 import snow_icon from '../Assets/snow.png';
 import wind_icon from '../Assets/wind.png';
 import humidity_icon from '../Assets/humidity.png';
+import NotFound from "../NotFound/NotFound";
 
 const WeatherApp = () => {
     const [wicon, setWicon] = useState(cloud_icon);
@@ -24,6 +27,12 @@ const WeatherApp = () => {
         let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
 
         let response = await fetch(url);
+
+        if (response.status === 404) {
+            alert("404 Error")
+            console.log("404 eror");
+            return <Navigate to={NotFound} />
+        }
 
         let data = await response.json();
 
