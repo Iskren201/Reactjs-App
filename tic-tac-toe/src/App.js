@@ -1,17 +1,11 @@
-import { useState } from "react";
+import React from "react";
+import TicTacToe from "./Components/TicTacToe/TicTacToe";
 import "./App.css";
 
 function App() {
-    const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
-
-    return (
-        <div className="App">
-            <div className="board">
-                <div className="row"></div>
-                <div className="row"></div>
-                <div className="row"></div>
-            </div>
-        </div>
+    return (<div >
+        <TicTacToe />
+    </div>
     );
 
 
