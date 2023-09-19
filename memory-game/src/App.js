@@ -6,9 +6,6 @@ function App() {
         <div className="App">
             <h1>Memory Game - ReactJs</h1>
             <Cards />
-            {/* <div className="container">
-                
-            </div> */}
         </div>
     );
 }
