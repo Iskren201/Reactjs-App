@@ -1,12 +1,23 @@
+import { useForm } from "../../hook/useForm";
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+
+const LoginFormKeys = {
+    Email: 'email',
+    Password: 'password',
+}
 
 export const Login = (props) => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
     const [name, setName] = useState("");
     const { onLoginSubmit } = useContext(AuthContext);
+    const { values, changeHandler } = useForm({
+        [LoginFormKeys.Email]: '',
+        [LoginFormKeys.Password]: '',
+
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,21 +30,21 @@ export const Login = (props) => {
             <form className="login-form" onSubmit={onLoginSubmit}>
                 <label htmlFor="email">email</label>
                 <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={values[LoginFormKeys.Email]}
+                    onChange={changeHandler}
                     type="email"
                     placeholder="youremail@gmail.com"
                     id="email"
-                    name="email"
+                    name={LoginFormKeys.Email}
                 />
                 <label htmlFor="password">password</label>
                 <input
-                    value={pass}
-                    onChange={(e) => setPass(e.target.value)}
+                    value={values[LoginFormKeys.Password]}
+                    onChange={changeHandler}
                     type="password"
                     placeholder="********"
                     id="password"
-                    name="password"
+                    name={LoginFormKeys.Password}
                 />
                 <button type="submit">Log In</button>
             </form>
