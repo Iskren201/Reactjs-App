@@ -8,32 +8,24 @@ const LoginFormKeys = {
     Password: 'password',
 }
 
-export const Login = (props) => {
-    const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("");
-    const [name, setName] = useState("");
+export const Login = () => {
     const { onLoginSubmit } = useContext(AuthContext);
     const { values, changeHandler } = useForm({
         [LoginFormKeys.Email]: '',
         [LoginFormKeys.Password]: '',
 
-    })
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Login");
-    };
+    }, onLoginSubmit)
 
     return (
         <div className="auth-form-container">
             <h2>Login</h2>
-            <form className="login-form" onSubmit={onLoginSubmit}>
+            <form className="login-form" method="POST" onSubmit={onLoginSubmit}>
                 <label htmlFor="email">email</label>
                 <input
                     value={values[LoginFormKeys.Email]}
                     onChange={changeHandler}
                     type="email"
-                    placeholder="youremail@gmail.com"
+                    placeholder="example@gmail.com"
                     id="email"
                     name={LoginFormKeys.Email}
                 />
