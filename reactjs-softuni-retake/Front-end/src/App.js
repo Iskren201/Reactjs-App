@@ -7,41 +7,65 @@ import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
+import { AuthContext } from "./components/contexts/AuthContext";
 
 function App() {
-  const [cartIsShown, setCartIsShown] = useState(false);
+    const [cartIsShown, setCartIsShown] = useState(false);
+    const [auth, setAuth] = useState({});
+    const [currentForm, setCurrentForm] = useState("login");
 
-  const showCartHandler = () => {
-    setCartIsShown(true);
-  };
+    const onLoginSubmit = async (e) => {
+        e.preventDefault();
+        console.log(Object.fromEntries(new FormData(e.target)));
+    };
 
-  const hideCartHandler = () => {
-    setCartIsShown(false);
-  };
-  const [currentForm, setCurrentForm] = useState("login");
+    const showCartHandler = () => {
+        setCartIsShown(true);
+    };
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
+    const hideCartHandler = () => {
+        setCartIsShown(false);
+    };
 
-  return (
-    <CartProvider>
-      {/* {currentForm === "login" ? (
-        <Login onFormSwitch={toggleForm} />
-      ) : (
-        <Register onFormSwitch={toggleForm} />
-      )} */}
+    const toggleForm = (formName) => {
+        setCurrentForm(formName);
+    };
 
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler} />
-      <main>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Meals />
-      </main>
-    </CartProvider>
-  );
+    return (
+        <AuthContext.Provider value={{ onLoginSubmit }}>
+            <main>
+                <Routes>
+                    <Route path="/" element={<Header />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                </Routes>
+            </main>
+        </AuthContext.Provider>
+    );
+    // <CartProvider>
+    // {
+    //      {currentForm === "login" ? (
+    //       <Login onFormSwitch={toggleForm} />
+    //     ) : (
+    //       <Register onFormSwitch={toggleForm} />
+    //     )} 
+    // }
+
+    //   {cartIsShown && <Cart onClose={hideCartHandler} />}
+    //   <Header onShowCart={showCartHandler} />
+    //   <main>
+    //     <Routes>
+    //       <Route
+    //         path="/login"
+    //         element={<Login />}
+    //         onLoginSubmit={onLoginSubmit}
+    //       />
+    //     </Routes>
+    //     <Meals />
+    //   </main>
+    // </CartProvider>
+
+
 }
 
 export default App;

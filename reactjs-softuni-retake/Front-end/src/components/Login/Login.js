@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 export const Login = (props) => {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const [name, setName] = useState("");
+    const { onLoginSubmit } = useContext(AuthContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("test");
+        console.log("Login");
     };
 
     return (
         <div className="auth-form-container">
             <h2>Login</h2>
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={onLoginSubmit}>
                 <label htmlFor="email">email</label>
                 <input
                     value={email}
@@ -33,11 +37,11 @@ export const Login = (props) => {
                 />
                 <button type="submit">Log In</button>
             </form>
-            <button
-                className="link-btn"
-                onClick={() => props.onFormSwitch("register")}
-            >
-                Don't have an account? Register here.
+            <button className="link-btn">
+                <Link to="/register">Already have an account? Login here.</Link>
+                <div>
+                    <Link to="/">Go Back Home</Link>
+                </div>
             </button>
         </div>
     );

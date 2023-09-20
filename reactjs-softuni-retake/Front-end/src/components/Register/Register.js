@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Register = (props) => {
   const [email, setEmail] = useState("");
@@ -7,7 +8,7 @@ export const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("test");
+    console.log("register");
   };
 
   return (
@@ -42,8 +43,11 @@ export const Register = (props) => {
         />
         <button type="submit">Log In</button>
       </form>
-      <button className="link-btn" onClick={() => props.onFormSwitch("login")}>
-        Already have an account? Login here.
+      <button className="link-btn">
+        <Link to="/login">Already have an account? Login here.</Link>
+        <div>
+          <Link to="/">Go Back Home</Link>
+        </div>
       </button>
     </div>
   );
