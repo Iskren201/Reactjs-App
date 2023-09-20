@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
@@ -10,30 +10,29 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 
 import { AuthContext } from "./components/contexts/AuthContext";
-import * as authService from './service/authService';
+
 
 
 function App() {
     const [cartIsShown, setCartIsShown] = useState(false);
     const [auth, setAuth] = useState({});
     const [currentForm, setCurrentForm] = useState("login");
+    const [logintrue, setLoginTrue] = useState(false);
 
     const onLoginSubmit = async (data) => {
-        console.log(data);
-        console.log("Login");
     };
 
-    const showCartHandler = () => {
-        setCartIsShown(true);
-    };
+    // const showCartHandler = () => {
+    //     setCartIsShown(true);
+    // };
 
-    const hideCartHandler = () => {
-        setCartIsShown(false);
-    };
+    // const hideCartHandler = () => {
+    //     setCartIsShown(false);
+    // };
 
-    const toggleForm = (formName) => {
-        setCurrentForm(formName);
-    };
+    // const toggleForm = (formName) => {
+    //     setCurrentForm(formName);
+    // };
 
     return (
         <AuthContext.Provider value={{ onLoginSubmit }}>
